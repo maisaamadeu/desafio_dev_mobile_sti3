@@ -14,7 +14,7 @@ Neste desafio técnico realizei a criação de um aplicativo de gerenciamento de
 - Gerenciamento de Estado: Foi utilizado o GetX para o gerenciamento de estado, proporcionando uma maneira eficiente de controlar as interações entre as camadas do projeto e atualizações da interface de usuário.
 - Requisições HTTP: Um cliente HTTP personalizado foi implementado para realizar as requisições à API, oferecendo mais controle sobre o tratamento de erros e personalizações no envio e recebimento de dados.
 - Persistência de Dados: A persistência foi realizada com o Hive, um banco de dados local rápido e fácil de usar, que armazena os dados retornados pela API para serem exibidos nas telas.
-- Injeção de Dependências: Utilizamos o GetIt para gerenciar a injeção de dependências, facilitando a modularização e tornando o código mais escalável e testável.
+- Injeção de Dependências: Utilizei o GetX para gerenciar a injeção de dependências, facilitando a modularização e tornando o código mais escalável e testável.
 
 # Funcionalidades Principais
 
