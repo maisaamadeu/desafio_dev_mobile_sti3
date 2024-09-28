@@ -1,3 +1,5 @@
+ <img src="https://github.com/maisaamadeu/desafio_dev_mobile_sti3/blob/main/assets/app/icon.png" width="150" />
+ 
 # Desafio Dev Mobile - Flutter
 
 Neste desafio técnico realizei a criação de um aplicativo de gerenciamento de pedidos. O objetivo principal era consumir uma API que retornasse uma lista de pedidos e armazená-los localmente utilizando um banco de dados para exibição e manipulação. Além das funcionalidades básicas solicitadas, o projeto inclui uma funcionalidade extra de gráficos para melhor visualização dos dados, uma adição que considerei crucial para a compreensão das informações pelos usuários.
@@ -19,6 +21,11 @@ Neste desafio técnico realizei a criação de um aplicativo de gerenciamento de
 ### Tela Inicial
 A tela inicial do aplicativo exibe um menu lateral contendo as opções "Pedidos", "Relatórios" e "Gráficos". Ao clicar em cada uma dessas opções, o usuário será direcionado para a página correspondente.
 
+<p float="left">
+  <img src="https://github.com/maisaamadeu/desafio_dev_mobile_sti3/blob/main/assets/screens/home.png" width="240" />
+ <img src="https://github.com/maisaamadeu/desafio_dev_mobile_sti3/blob/main/assets/screens/home_drawer.png" width="240" />
+</p>
+
 ### Tela de Pedidos
 
 A tela de pedidos contém um botão "Consultar" que faz a chamada à API para buscar a lista de pedidos.
@@ -34,6 +41,12 @@ Cada item da lista corresponde a um pedido de um cliente, com um ou mais produto
 Ao clicar uma vez em um item da lista, a coluna lateral exibe detalhes do pedido selecionado, incluindo informações do cliente, endereço de entrega e status.  
 Ao clicar duas vezes em um item ou no botão "Ver Detalhes" da coluna lateral, uma modal é aberto mostrando os dados dos produtos e parcelas correspondentes ao pedido selecionado.  
 
+<p float="left">
+  <img src="https://github.com/maisaamadeu/desafio_dev_mobile_sti3/blob/main/assets/screens/orders.png" width="240" />
+ <img src="https://github.com/maisaamadeu/desafio_dev_mobile_sti3/blob/main/assets/screens/orders_details.png" width="240" />
+  <img src="https://github.com/maisaamadeu/desafio_dev_mobile_sti3/blob/main/assets/screens/orders_modal.png" width="240" />
+</p>
+
 ### Tela de Relatórios
 
 A tela de relatórios oferece uma visão mais ampla dos dados armazenados, com foco em totalizações e estatísticas.  
@@ -44,6 +57,13 @@ Combobox de Seleção: O usuário pode escolher o tipo de relatório que deseja 
 - Totalização de Vendas por Cidade: Exibe a distribuição de vendas por diferentes cidades.
 - Vendas por Faixa Etária: Mostra a quantidade de vendas e o valor total por faixa etária dos clientes.
 
+<p float="left">
+  <img src="https://github.com/maisaamadeu/desafio_dev_mobile_sti3/blob/main/assets/screens/reports_1.png" width="240" />
+ <img src="https://github.com/maisaamadeu/desafio_dev_mobile_sti3/blob/main/assets/screens/reports_2.png" width="240" />
+  <img src="https://github.com/maisaamadeu/desafio_dev_mobile_sti3/blob/main/assets/screens/reports_3.png" width="240" />
+  <img src="https://github.com/maisaamadeu/desafio_dev_mobile_sti3/blob/main/assets/screens/reports_4.png" width="240" />
+</p>
+
 ### Tela de Gráficos
 
 Adicionei uma funcionalidade extra de gráficos ao projeto para enriquecer a visualização dos dados dos relatórios, mesmo que essa funcionalidade não tenha sido solicitada no desafio original. Os gráficos implementados são:
@@ -51,6 +71,12 @@ Adicionei uma funcionalidade extra de gráficos ao projeto para enriquecer a vis
 - Top Produtos: Um gráfico de pizza que exibe os cinco produtos mais vendidos, com uma legenda que identifica diferentes itens, como camisetas, tênis, jaquetas e bonés.
 - Top Vendas: Um gráfico de barras que mostra os cinco clientes com os maiores valores de compra.
 - Pedidos: Um gráfico de barras que ilustra a quantidade de pedidos, separando-os entre aprovados e cancelados.
+
+<p float="left">
+  <img src="https://github.com/maisaamadeu/desafio_dev_mobile_sti3/blob/main/assets/screens/chart_1.png" width="240" />
+ <img src="https://github.com/maisaamadeu/desafio_dev_mobile_sti3/blob/main/assets/screens/chart_2.png" width="240" />
+  <img src="https://github.com/maisaamadeu/desafio_dev_mobile_sti3/blob/main/assets/screens/chart_3.png" width="240" />
+</p>
 
 # Teste o Aplicativo Facilmente
 Se você possui um dispositivo Android e deseja simplesmente experimentar o funcionamento do aplicativo sem precisar examinar o código-fonte, siga estas etapas:
