@@ -130,7 +130,7 @@ class _OrdersViewState extends State<OrdersView> {
                             children: [
                               DataTable(
                                 border: TableBorder.all(
-                                  color: Colors.teal,
+                                  color: Theme.of(context).primaryColor,
                                   borderRadius: BorderRadius.circular(5),
                                   width: 1,
                                 ),
@@ -154,7 +154,9 @@ class _OrdersViewState extends State<OrdersView> {
                                       color: _viewModel.selectedOrder.value ==
                                               order
                                           ? WidgetStateProperty.all(
-                                              Colors.teal.shade100,
+                                              Theme.of(context)
+                                                  .primaryColor
+                                                  .withOpacity(0.1),
                                             )
                                           : null,
                                       cells: [

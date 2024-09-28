@@ -11,9 +11,9 @@ class SalesByAgeGroupTable extends StatelessWidget {
   Widget build(BuildContext context) {
     return DataTable(
       border: TableBorder.all(
-        color: Colors.teal,
+        color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(5),
-        width: 2,
+        width: 1,
       ),
       showBottomBorder: true,
       columns: const [

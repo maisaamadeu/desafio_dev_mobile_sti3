@@ -27,9 +27,15 @@ dev_dependencies:
   flutter_lints: ^3.0.0
   hive_generator: ^1.1.0
   build_runner: ^2.1.0
+  flutter_native_splash: ^1.2.0
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
 
+flutter_native_splash:
+  color: "#014955"
+  image: assets/app/splash.png
+  android: true
+  ios: true

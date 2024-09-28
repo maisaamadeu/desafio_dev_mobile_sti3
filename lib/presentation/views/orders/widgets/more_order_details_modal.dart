@@ -42,7 +42,7 @@ class MoreOrderDetailsModal extends StatelessWidget {
                     children: [
                       DataTable(
                         border: TableBorder.all(
-                          color: Colors.teal,
+                          color: Theme.of(context).primaryColor,
                           borderRadius: BorderRadius.circular(5),
                           width: 1,
                         ),
@@ -85,7 +85,7 @@ class MoreOrderDetailsModal extends StatelessWidget {
                       const SizedBox(height: 20), // Espaço entre as tabelas
                       DataTable(
                         border: TableBorder.all(
-                          color: Colors.teal,
+                          color: Theme.of(context).primaryColor,
                           borderRadius: BorderRadius.circular(5),
                           width: 1,
                         ),

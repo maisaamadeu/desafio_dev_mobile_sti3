@@ -23,7 +23,7 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('PEDIDOS STI3'),
+        title: const Text('STi3 PEDIDOS'),
       ),
       drawer: Drawer(
         child: ListView(

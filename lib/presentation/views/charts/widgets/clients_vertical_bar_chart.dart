@@ -66,9 +66,11 @@ class ClientsVerticalBarChart extends StatelessWidget {
                   borderData: FlBorderData(
                     show: false,
                   ),
-                  maxY: clients
-                          .map((e) => e.totalAmount)
-                          .reduce((a, b) => a > b ? a : b) +
+                  maxY: (clients
+                                  .map((e) => e.totalAmount)
+                                  .reduce((a, b) => a > b ? a : b) /
+                              500)
+                          .ceil() *
                       500,
                   titlesData: FlTitlesData(
                     topTitles: const AxisTitles(),

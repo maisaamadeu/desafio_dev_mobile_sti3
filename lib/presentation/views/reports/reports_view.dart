@@ -50,10 +50,25 @@ class _ReportsViewState extends State<ReportsView> {
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
+                          borderSide: BorderSide(
+                            color: Theme.of(context).primaryColor,
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                          borderSide: BorderSide(
+                            color: Theme.of(context).primaryColor,
+                            width: 1,
+                          ),
                         ),
                         contentPadding: const EdgeInsets.all(12),
                       ),
                       hint: const Text('Selecione o relatório'),
+                      style: const TextStyle(
+                        overflow: TextOverflow.ellipsis,
+                        color: Colors.black,
+                      ),
                       value: _viewModel.reportType.value,
                       isExpanded: true,
                       items: ReportTypeEnum.values

@@ -31,7 +31,7 @@ class OrderDetailsWidget extends StatelessWidget {
       width: 300,
       decoration: BoxDecoration(
         border: Border.all(
-          color: Colors.teal,
+          color: Theme.of(context).primaryColor,
           width: 1,
         ),
         borderRadius: BorderRadius.circular(5),
@@ -43,9 +43,9 @@ class OrderDetailsWidget extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(bottom: 5),
             padding: const EdgeInsets.all(10),
-            decoration: const BoxDecoration(
-              color: Colors.teal,
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(3),
                 topRight: Radius.circular(3),
               ),
@@ -65,11 +65,11 @@ class OrderDetailsWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
+                Text(
                   "Informações do Pedido",
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.teal,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
                 DataWithLabelWidget(
@@ -102,11 +102,11 @@ class OrderDetailsWidget extends StatelessWidget {
                   data: 'R\$ ${order.totalAmount.toStringAsFixed(2)}',
                 ),
                 const SizedBox(height: 20),
-                const Text(
+                Text(
                   "Dados do Cliente",
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.teal,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
                 DataWithLabelWidget(
@@ -126,11 +126,11 @@ class OrderDetailsWidget extends StatelessWidget {
                   data: order.client.email,
                 ),
                 const SizedBox(height: 20),
-                const Text(
+                Text(
                   "Local de Entrega",
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.teal,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
                 DataWithLabelWidget(
