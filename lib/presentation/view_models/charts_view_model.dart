@@ -1,41 +1,14 @@
 import 'package:desafio_dev_mobile_sti3/data/data.dart';
-import 'package:desafio_dev_mobile_sti3/domain/domain.dart';
-import 'package:desafio_dev_mobile_sti3/presentation/view_models/view_models.dart';
-import 'package:get/get.dart';
+import 'package:desafio_dev_mobile_sti3/presentation/presentation.dart';
 
-class ChartsViewModel extends GetxController {
-  final Rx<AppStatusEnum> appStatus = Rx<AppStatusEnum>(AppStatusEnum.initial);
-  final Rx<List<OrderModel>> orders = Rx<List<OrderModel>>([]);
-
-  final BaseOrdersViewModel baseOrdersViewModel;
-
+class ChartsViewModel extends BaseOrdersViewModel {
   ChartsViewModel({
-    required this.baseOrdersViewModel,
+    required super.fetchOrdersUseCase,
+    required super.getLocalOrdersUsecase,
+    required super.clearLocalOrdersUsecase,
+    required super.saveLocalOrdersUsecase,
+    required super.ordersStreamController,
   });
-
-  Future<void> fetchNetworkOrders() async {
-    appStatus.value = AppStatusEnum.loading;
-    final result = await baseOrdersViewModel.fetchOrders();
-    appStatus.value = result.fold(
-      (error) => AppStatusEnum.error,
-      (data) {
-        orders.value.assignAll(data);
-        return AppStatusEnum.loaded;
-      },
-    );
-  }
-
-  Future<void> fetchLocalOrders() async {
-    appStatus.value = AppStatusEnum.loading;
-    final result = await baseOrdersViewModel.getLocalOrders();
-    appStatus.value = result.fold(
-      (error) => AppStatusEnum.error,
-      (data) {
-        orders.value.assignAll(data);
-        return AppStatusEnum.loaded;
-      },
-    );
-  }
 
   List<ItemModel> mostSoldProducts() {
     final List<ItemModel> items = [];

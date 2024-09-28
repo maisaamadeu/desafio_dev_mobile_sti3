@@ -1,42 +1,18 @@
 import 'package:desafio_dev_mobile_sti3/data/data.dart';
 import 'package:desafio_dev_mobile_sti3/domain/domain.dart';
-import 'package:desafio_dev_mobile_sti3/presentation/view_models/view_models.dart';
+import 'package:desafio_dev_mobile_sti3/presentation/presentation.dart';
 import 'package:get/get.dart';
 
-class ReportsViewModel extends GetxController {
-  Rx<AppStatusEnum> appStatus = Rx<AppStatusEnum>(AppStatusEnum.initial);
+class ReportsViewModel extends BaseOrdersViewModel {
   Rx<ReportTypeEnum?> reportType = Rx<ReportTypeEnum?>(null);
-  Rx<List<OrderModel>> orders = Rx<List<OrderModel>>([]);
-
-  final BaseOrdersViewModel baseOrdersViewModel;
 
   ReportsViewModel({
-    required this.baseOrdersViewModel,
+    required super.fetchOrdersUseCase,
+    required super.getLocalOrdersUsecase,
+    required super.clearLocalOrdersUsecase,
+    required super.saveLocalOrdersUsecase,
+    required super.ordersStreamController,
   });
-
-  Future<void> fetchNetworkOrders() async {
-    appStatus.value = AppStatusEnum.loading;
-    final result = await baseOrdersViewModel.fetchOrders();
-    appStatus.value = result.fold(
-      (error) => AppStatusEnum.error,
-      (data) {
-        orders.value.assignAll(data);
-        return AppStatusEnum.loaded;
-      },
-    );
-  }
-
-  Future<void> fetchLocalOrders() async {
-    appStatus.value = AppStatusEnum.loading;
-    final result = await baseOrdersViewModel.getLocalOrders();
-    appStatus.value = result.fold(
-      (error) => AppStatusEnum.error,
-      (data) {
-        orders.value.assignAll(data);
-        return AppStatusEnum.loaded;
-      },
-    );
-  }
 
   void setReportType(ReportTypeEnum? reportType) {
     this.reportType.value = reportType;

@@ -1,16 +1,14 @@
 import 'package:desafio_dev_mobile_sti3/core/network/network.dart';
 import 'package:desafio_dev_mobile_sti3/di/dependency_injection.dart';
-import 'package:get_it/get_it.dart';
-
-final getIt = GetIt.instance;
+import 'package:get/get.dart';
 
 void initDependecies() {
-  getIt.registerLazySingleton<NetworkInfoRepository>(
+  Get.lazyPut<NetworkInfoRepository>(
     () => NetworkInfoRepositoryImpl(),
   );
-  getIt.registerLazySingleton(
+  Get.lazyPut<ServerApiClient>(
     () => ServerApiClient(
-      networkInfoRepository: getIt(),
+      networkInfoRepository: Get.find(),
     ),
   );
 }

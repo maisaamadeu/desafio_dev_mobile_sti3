@@ -1,79 +1,84 @@
-import 'package:desafio_dev_mobile_sti3/core/core.dart';
 import 'package:desafio_dev_mobile_sti3/data/data.dart';
 import 'package:desafio_dev_mobile_sti3/domain/domain.dart';
 import 'package:desafio_dev_mobile_sti3/presentation/presentation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:get/get.dart';
 
 Future<void> initOrders() async {
   final ordersBox = await Hive.openLazyBox("orders");
 
-  getIt.registerLazySingleton<IRemoteOrdersDatasource>(
+  Get.lazyPut<IRemoteOrdersDatasource>(
     () => RemoteOrdersDatasourceImplementation(
-      serverApiClient: getIt(),
+      serverApiClient: Get.find(),
     ),
   );
 
-  getIt.registerLazySingleton<ILocalOrdersDatasource>(
+  Get.lazyPut<ILocalOrdersDatasource>(
     () => LocalOrdersDatasourceImplementation(
       box: ordersBox,
     ),
   );
 
-  getIt.registerLazySingleton<IOrdersRepository>(
+  Get.lazyPut<IOrdersRepository>(
     () => OrdersRepositoryImplementation(
-      remoteOrdersDatasource: getIt(),
-      localOrdersDatasource: getIt(),
+      remoteOrdersDatasource: Get.find(),
+      localOrdersDatasource: Get.find(),
     ),
   );
 
-  getIt.registerLazySingleton<FetchOrdersUseCase>(
+  Get.lazyPut<FetchOrdersUseCase>(
     () => FetchOrdersUseCase(
-      repository: getIt(),
+      repository: Get.find(),
     ),
   );
 
-  getIt.registerLazySingleton<GetLocalOrdersUsecase>(
+  Get.lazyPut<GetLocalOrdersUsecase>(
     () => GetLocalOrdersUsecase(
-      repository: getIt(),
+      repository: Get.find(),
     ),
   );
 
-  getIt.registerLazySingleton<SaveLocalOrdersUsecase>(
+  Get.lazyPut<SaveLocalOrdersUsecase>(
     () => SaveLocalOrdersUsecase(
-      repository: getIt(),
+      repository: Get.find(),
     ),
   );
 
-  getIt.registerLazySingleton<ClearLocalOrdersUsecase>(
+  Get.lazyPut<ClearLocalOrdersUsecase>(
     () => ClearLocalOrdersUsecase(
-      repository: getIt(),
+      repository: Get.find(),
     ),
   );
 
-  getIt.registerLazySingleton(
-    () => BaseOrdersViewModel(
-      fetchOrdersUseCase: getIt(),
-      getLocalOrdersUsecase: getIt(),
-      clearLocalOrdersUsecase: getIt(),
-      saveLocalOrdersUsecase: getIt(),
-    ),
+  Get.lazyPut<OrdersStreamController>(
+    () => OrdersStreamController(),
   );
 
-  getIt.registerLazySingleton(
+  Get.lazyPut<OrdersViewModel>(
     () => OrdersViewModel(
-      baseOrdersViewModel: getIt(),
+      fetchOrdersUseCase: Get.find(),
+      getLocalOrdersUsecase: Get.find(),
+      clearLocalOrdersUsecase: Get.find(),
+      saveLocalOrdersUsecase: Get.find(),
+      ordersStreamController: Get.find(),
     ),
   );
 
-  getIt.registerLazySingleton(
+  Get.lazyPut<ReportsViewModel>(
     () => ReportsViewModel(
-      baseOrdersViewModel: getIt(),
+      fetchOrdersUseCase: Get.find(),
+      getLocalOrdersUsecase: Get.find(),
+      clearLocalOrdersUsecase: Get.find(),
+      saveLocalOrdersUsecase: Get.find(),
+      ordersStreamController: Get.find(),
     ),
   );
 
-  getIt.registerLazySingleton(
-    () => ChartsViewModel(
-      baseOrdersViewModel: getIt(),
-    ),
-  );
+  Get.lazyPut<ChartsViewModel>(() => ChartsViewModel(
+        fetchOrdersUseCase: Get.find(),
+        getLocalOrdersUsecase: Get.find(),
+        clearLocalOrdersUsecase: Get.find(),
+        saveLocalOrdersUsecase: Get.find(),
+        ordersStreamController: Get.find(),
+      ));
 }

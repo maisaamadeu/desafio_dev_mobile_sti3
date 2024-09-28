@@ -1,67 +1,90 @@
-import 'package:dartz/dartz.dart';
 import 'package:desafio_dev_mobile_sti3/core/core.dart';
 import 'package:desafio_dev_mobile_sti3/data/data.dart';
 import 'package:desafio_dev_mobile_sti3/domain/domain.dart';
+import 'package:desafio_dev_mobile_sti3/presentation/presentation.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class BaseOrdersViewModel {
+class BaseOrdersViewModel extends GetxController {
   final FetchOrdersUseCase fetchOrdersUseCase;
   final GetLocalOrdersUsecase getLocalOrdersUsecase;
   final ClearLocalOrdersUsecase clearLocalOrdersUsecase;
   final SaveLocalOrdersUsecase saveLocalOrdersUsecase;
+  final OrdersStreamController ordersStreamController;
 
   BaseOrdersViewModel({
     required this.fetchOrdersUseCase,
     required this.getLocalOrdersUsecase,
     required this.clearLocalOrdersUsecase,
     required this.saveLocalOrdersUsecase,
+    required this.ordersStreamController,
   });
 
-  Future<Either<Failure, List<OrderModel>>> getLocalOrders() async {
+  @override
+  onInit() {
+    super.onInit();
+    fetchLocalOrders();
+    ordersStreamController.stream.listen((newOrders) {
+      orders.value.assignAll(newOrders);
+      filteredOrders.value.assignAll(newOrders);
+      callback?.call(newOrders);
+    });
+  }
+
+  final Rx<AppStatusEnum> appStatus = Rx<AppStatusEnum>(AppStatusEnum.initial);
+  final Rx<List<OrderModel>> orders = Rx<List<OrderModel>>([]);
+  final Rx<List<OrderModel>> filteredOrders = Rx<List<OrderModel>>([]);
+  ValueChanged<List<OrderModel>>? callback;
+
+  Future<void> fetchLocalOrders() async {
+    appStatus.value = AppStatusEnum.loading;
     final result = await getLocalOrdersUsecase(NoParams());
-    return await result.fold(
-      (error) async {
-        return Left(error);
+    result.fold(
+      (error) {
+        appStatus.value = AppStatusEnum.error;
       },
-      (data) async {
-        final newOrders = data.map((e) => orderModelMapper(e)).toList();
-        return Right(newOrders);
+      (data) {
+        final newOrders = data
+            .map(
+              (e) => orderModelMapper(e),
+            )
+            .toList();
+
+        ordersStreamController.updateOrders(newOrders);
+        appStatus.value = AppStatusEnum.loaded;
       },
     );
   }
 
-  Future<Either<Failure, List<OrderModel>>> fetchOrders() async {
+  Future<void> fetchNetworkOrders() async {
+    appStatus.value = AppStatusEnum.loading;
     final result = await fetchOrdersUseCase(NoParams());
-    return await result.fold(
+    result.fold(
       (error) async {
-        return Left(error);
+        appStatus.value = AppStatusEnum.error;
       },
       (data) async {
         final newOrders = data.map((e) => orderModelMapper(e)).toList();
 
         final clearResult = await clearLocalOrdersUsecase(NoParams());
         if (clearResult.isLeft()) {
-          return Left(
-            clearResult.fold(
-              (failure) => failure,
-              (success) => CacheFailure(),
-            ),
-          );
+          appStatus.value = AppStatusEnum.error;
+          return;
         }
-
         final saveResult = await saveLocalOrdersUsecase(
           SaveOrdersParams(orders: newOrders),
         );
         if (saveResult.isLeft()) {
-          return Left(
-            saveResult.fold(
-              (failure) => failure,
-              (success) => CacheFailure(),
-            ),
-          );
+          appStatus.value = AppStatusEnum.error;
+          return;
         }
-
-        return Right(newOrders);
+        ordersStreamController.updateOrders(newOrders);
+        appStatus.value = AppStatusEnum.loaded;
       },
     );
+  }
+
+  void setCallback(ValueChanged<List<OrderModel>> callback) {
+    this.callback = callback;
   }
 }

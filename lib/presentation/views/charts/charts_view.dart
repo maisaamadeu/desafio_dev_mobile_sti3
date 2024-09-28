@@ -1,4 +1,3 @@
-import 'package:desafio_dev_mobile_sti3/core/core.dart';
 import 'package:desafio_dev_mobile_sti3/domain/domain.dart';
 import 'package:desafio_dev_mobile_sti3/presentation/view_models/view_models.dart';
 import 'package:desafio_dev_mobile_sti3/presentation/views/charts/widgets/widgets.dart';
@@ -13,13 +12,7 @@ class ChartsView extends StatefulWidget {
 }
 
 class _ChartsViewState extends State<ChartsView> {
-  final ChartsViewModel _viewModel = getIt<ChartsViewModel>();
-
-  @override
-  void initState() {
-    super.initState();
-    _viewModel.fetchLocalOrders();
-  }
+  final ChartsViewModel _viewModel = Get.find<ChartsViewModel>();
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:desafio_dev_mobile_sti3/core/core.dart';
 import 'package:desafio_dev_mobile_sti3/data/data.dart';
 import 'package:desafio_dev_mobile_sti3/domain/domain.dart';
 import 'package:desafio_dev_mobile_sti3/presentation/view_models/orders_view_model.dart';
@@ -16,7 +15,7 @@ class OrdersView extends StatefulWidget {
 }
 
 class _OrdersViewState extends State<OrdersView> {
-  final OrdersViewModel _viewModel = getIt<OrdersViewModel>();
+  final OrdersViewModel _viewModel = Get.find<OrdersViewModel>();
 
   final TextEditingController _searchController = TextEditingController();
   final ScrollController _scrollController = ScrollController();
@@ -24,12 +23,6 @@ class _OrdersViewState extends State<OrdersView> {
   final DateFormat complexDateFormat =
       DateFormat('EEEE, d \'de\' MMMM, yyyy', 'pt_BR');
   final DateFormat simpleDateFormat = DateFormat('dd/MM/yyyy', 'pt_BR');
-
-  @override
-  void initState() {
-    super.initState();
-    _viewModel.fetchLocalOrders();
-  }
 
   Color getStatusColor(OrderStatusEnum status) {
     switch (status) {
@@ -74,7 +67,27 @@ class _OrdersViewState extends State<OrdersView> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(() {
+      _viewModel.updateClientName(_searchController.text);
+      _viewModel.filterOrdersByClientName();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _searchController.dispose();
+    _scrollController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (_searchController.text != _viewModel.clientName.value) {
+      _searchController.text = _viewModel.clientName.value;
+    }
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(
@@ -106,9 +119,6 @@ class _OrdersViewState extends State<OrdersView> {
                           isDense: true,
                         ),
                         enabled: _viewModel.orders.value.isNotEmpty,
-                        onChanged: (value) {
-                          _viewModel.filterOrdersByClientName(value);
-                        },
                       ),
                       const SizedBox(height: 5),
                       Align(

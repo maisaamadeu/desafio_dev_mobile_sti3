@@ -3,7 +3,6 @@ import 'package:desafio_dev_mobile_sti3/core/utils/map_indexed.dart';
 import 'package:desafio_dev_mobile_sti3/presentation/views/charts/widgets/legend_chart.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 // ignore: must_be_immutable
 class SalesPieChart extends StatelessWidget {
